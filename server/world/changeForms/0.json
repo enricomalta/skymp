@@ -1,0 +1,444 @@
+{
+  "angle": [
+    33.03450012207031,
+    0.0,
+    350.18975830078125
+  ],
+  "appearanceDump": {
+    "hairColor": 1053202,
+    "headTextureSetId": 501247,
+    "headpartIds": [
+      333354,
+      501248,
+      937516,
+      937418,
+      387093,
+      387060,
+      387055,
+      331957,
+      599306,
+      331904
+    ],
+    "isFemale": false,
+    "name": "HaKoG",
+    "options": [
+      0.4000000059604645,
+      -0.4000000059604645,
+      0.10000000149011612,
+      1.0,
+      0.0,
+      1.0,
+      0.5,
+      -0.4000000059604645,
+      0.5199999809265137,
+      -1.0,
+      -0.20000000298023224,
+      0.0,
+      0.20000000298023224,
+      -0.5,
+      0.30000001192092896,
+      1.0,
+      0.5,
+      0.0,
+      3.4028234663852886e+38
+    ],
+    "presets": [
+      21.0,
+      -1.0,
+      28.0,
+      26.0
+    ],
+    "raceId": 79687,
+    "skinColor": 4147257,
+    "tints": [
+      {
+        "argb": -12629959,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\SkinTone.dds",
+        "type": 6
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleUpperEyeSocket.dds",
+        "type": 4
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleLowerEyeSocket.dds",
+        "type": 5
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHead_Cheeks.dds",
+        "type": 2
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHead_Cheeks2.dds",
+        "type": 9
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHead_FrownLines.dds",
+        "type": 8
+      },
+      {
+        "argb": -13289662,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadNord_Lips.dds",
+        "type": 1
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHead_Nose.dds",
+        "type": 10
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadHuman_ForeHead.dds",
+        "type": 13
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadHuman_Chin.dds",
+        "type": 11
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadHuman_Neck.dds",
+        "type": 12
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_01.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_02.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_03.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_04.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_05.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_06.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_07.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_08.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_09.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadWarPaint_10.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadOrcWarPaint_01.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadOrcWarPaint_02.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadOrcWarPaint_03.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadOrcWarPaint_04.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadOrcWarPaint_05.dds",
+        "type": 7
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\RedGuardMaleEyeLinerStyle_01.dds",
+        "type": 3
+      },
+      {
+        "argb": -13688813,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadDirt_01.dds",
+        "type": 14
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadDirt_02.dds",
+        "type": 14
+      },
+      {
+        "argb": 16777215,
+        "texturePath": "Actors\\Character\\Character Assets\\TintMasks\\MaleHeadDirt_03.dds",
+        "type": 14
+      }
+    ],
+    "weight": 79.99999237060547
+  },
+  "baseContainerAdded": true,
+  "baseDesc": "7:Skyrim.esm",
+  "consoleCommandsAllowed": false,
+  "count": 0,
+  "dynamicFields": {
+    "private.discordRoles": []
+  },
+  "effects": [],
+  "equipmentDump": {
+    "instantSpell": 0,
+    "inv": {
+      "entries": [
+        {
+          "baseId": 77382,
+          "count": 1,
+          "worn": true
+        },
+        {
+          "baseId": 77385,
+          "count": 1,
+          "worn": true
+        },
+        {
+          "baseId": 77387,
+          "count": 1,
+          "worn": true
+        },
+        {
+          "baseId": 77389,
+          "count": 1,
+          "worn": true
+        },
+        {
+          "baseId": 79760,
+          "count": 1,
+          "worn": true
+        },
+        {
+          "baseId": 77494,
+          "count": 1,
+          "name": "Iron Shield"
+        },
+        {
+          "baseId": 77495,
+          "count": 1,
+          "name": "Iron Sword"
+        },
+        {
+          "baseId": 80254,
+          "count": 1,
+          "name": "Iron Dagger"
+        },
+        {
+          "baseId": 243042,
+          "count": 1,
+          "name": "Long Bow"
+        },
+        {
+          "baseId": 256810,
+          "count": 1,
+          "name": "Potion of the Warrior"
+        },
+        {
+          "baseId": 256819,
+          "count": 1,
+          "name": "Potion of Light Feet"
+        },
+        {
+          "baseId": 1017598,
+          "count": 1,
+          "name": "The Book of the Dragonborn"
+        },
+        {
+          "baseId": 120044,
+          "count": 2,
+          "name": "Torch"
+        },
+        {
+          "baseId": 236362,
+          "count": 2,
+          "name": "Potion of Resist Fire"
+        },
+        {
+          "baseId": 256733,
+          "count": 5,
+          "name": "Potion of Minor Healing"
+        },
+        {
+          "baseId": 256736,
+          "count": 5,
+          "name": "Potion of Minor Magicka"
+        },
+        {
+          "baseId": 256741,
+          "count": 5,
+          "name": "Potion of Minor Stamina"
+        },
+        {
+          "baseId": 10,
+          "count": 10,
+          "name": "Lockpick"
+        },
+        {
+          "baseId": 80253,
+          "count": 23
+        },
+        {
+          "baseId": 15,
+          "count": 140,
+          "name": "gold"
+        }
+      ]
+    },
+    "leftSpell": 0,
+    "numChanges": 5,
+    "rightSpell": 0,
+    "voiceSpell": 0
+  },
+  "formDesc": "0",
+  "healthPercentage": 1.0,
+  "healthRespawnPercentage": 1.0,
+  "inv": {
+    "entries": [
+      {
+        "baseId": 10,
+        "count": 10
+      },
+      {
+        "baseId": 15,
+        "count": 140
+      },
+      {
+        "baseId": 77382,
+        "count": 1
+      },
+      {
+        "baseId": 77385,
+        "count": 1
+      },
+      {
+        "baseId": 77387,
+        "count": 1
+      },
+      {
+        "baseId": 77389,
+        "count": 1
+      },
+      {
+        "baseId": 77494,
+        "count": 1
+      },
+      {
+        "baseId": 77495,
+        "count": 1
+      },
+      {
+        "baseId": 79760,
+        "count": 1
+      },
+      {
+        "baseId": 80253,
+        "count": 23
+      },
+      {
+        "baseId": 80254,
+        "count": 1
+      },
+      {
+        "baseId": 120044,
+        "count": 2
+      },
+      {
+        "baseId": 236362,
+        "count": 2
+      },
+      {
+        "baseId": 243042,
+        "count": 1
+      },
+      {
+        "baseId": 256733,
+        "count": 5
+      },
+      {
+        "baseId": 256736,
+        "count": 5
+      },
+      {
+        "baseId": 256741,
+        "count": 5
+      },
+      {
+        "baseId": 256810,
+        "count": 1
+      },
+      {
+        "baseId": 256819,
+        "count": 1
+      },
+      {
+        "baseId": 1017598,
+        "count": 1
+      }
+    ]
+  },
+  "isDead": false,
+  "isDeleted": false,
+  "isDisabled": true,
+  "isHarvested": false,
+  "isOpen": false,
+  "isRaceMenuOpen": false,
+  "learnedSpells": [],
+  "magickaPercentage": 1.0,
+  "magickaRespawnPercentage": 1.0,
+  "nextRelootDatetime": 0,
+  "position": [
+    133930.34375,
+    -61459.84375,
+    14696.1259765625
+  ],
+  "profileId": 1,
+  "recType": 1,
+  "spawnDelay": 25.0,
+  "spawnPoint_cellOrWorldDesc": "3c:Skyrim.esm",
+  "spawnPoint_pos": [
+    133857.0,
+    -61130.0,
+    14662.0
+  ],
+  "spawnPoint_rot": [
+    0.0,
+    0.0,
+    72.0
+  ],
+  "staminaPercentage": 1.0,
+  "staminaRespawnPercentage": 1.0,
+  "worldOrCellDesc": "3c:Skyrim.esm"
+}

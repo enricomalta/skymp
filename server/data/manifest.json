@@ -1,0 +1,37 @@
+{
+    "mods": [
+        {
+            "crc32": 616253901,
+            "filename": "Skyrim.esm",
+            "size": 249753412
+        },
+        {
+            "crc32": -423982917,
+            "filename": "Update.esm",
+            "size": 18874041
+        },
+        {
+            "crc32": -744926134,
+            "filename": "Dawnguard.esm",
+            "size": 25885111
+        },
+        {
+            "crc32": -1578363749,
+            "filename": "HearthFires.esm",
+            "size": 3977420
+        },
+        {
+            "crc32": 287315548,
+            "filename": "Dragonborn.esm",
+            "size": 64663863
+        }
+    ],
+    "versionMajor": 1,
+    "loadOrder": [
+        "Skyrim.esm",
+        "Update.esm",
+        "Dawnguard.esm",
+        "HearthFires.esm",
+        "Dragonborn.esm"
+    ]
+}
