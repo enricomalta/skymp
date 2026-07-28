@@ -1,6 +1,6 @@
+import { Module } from "./Module";
 import { Logger } from "./Logger";
 import { LoggerContext } from "./types/LoggerContext";
-import { Module } from "./Module";
 
 export class ModuleLoader {
 
@@ -15,7 +15,7 @@ export class ModuleLoader {
         if (exists) {
 
             throw new Error(
-                `O módulo "${module.name}" já foi registrado.`
+                `O modulo "${module.name}" ja foi registrado.`
             );
 
         }
@@ -24,7 +24,7 @@ export class ModuleLoader {
 
         Logger.info(
             LoggerContext.MODULE,
-            `Módulo "${module.name}" registrado.`
+            `Modulo "${module.name}" registrado.`
         );
 
     }
@@ -35,7 +35,7 @@ export class ModuleLoader {
 
             Logger.info(
                 LoggerContext.MODULE,
-                `Inicializando módulo "${module.name}".`
+                `Inicializando modulo "${module.name}".`
             );
 
             await module.initialize();
@@ -50,7 +50,7 @@ export class ModuleLoader {
 
             Logger.info(
                 LoggerContext.MODULE,
-                `Finalizando módulo "${module.name}".`
+                `Finalizando modulo "${module.name}".`
             );
 
             await module.shutdown();
