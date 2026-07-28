@@ -1,3 +1,4 @@
+import { CharacterBootstrap } from "./bootstrap/CharacterBootstrap";
 import { CharacterRepository } from "./CharacterRepository";
 
 import { Character } from "./models/Character";
@@ -6,6 +7,7 @@ import { CreateCharacterDto } from "./dto/CreateCharacterDto";
 export class CharacterService {
 
     private readonly repository = new CharacterRepository();
+    private readonly bootstrap = new CharacterBootstrap();
 
     public async createCharacter(
         dto: CreateCharacterDto
@@ -23,7 +25,7 @@ export class CharacterService {
 
         }
 
-        return this.repository.create({
+        const character = await this.repository.create({
 
             accountId: dto.accountId,
 

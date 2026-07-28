@@ -11,6 +11,10 @@ import { AuthModule } from "../modules/auth/AuthModule";
 import { CharacterModule } from "../modules/characters/CharacterModule";
 import { InventoryModule } from "../modules/inventory/InventoryModule";
 import { ItemModule } from "../modules/item/ItemModule";
+import { EconomyModule } from "../modules/economy/EconomyModule";
+import { NpcModule } from "../modules/npcs/NpcModule";
+import { QuestModule } from "../modules/quests/QuestModule";
+import { PlayerQuest } from "../modules/player-quest/models/PlayerQuest";
 
 /* 
 Uma observação importante para nossa arquitetura
@@ -55,6 +59,18 @@ export class Application {
 
         this.moduleLoader.register(
             new ItemModule()
+        );
+
+        this.moduleLoader.register(
+            new EconomyModule()
+        );
+
+        this.moduleLoader.register(
+            new NpcModule()
+        );
+
+        this.moduleLoader.register(
+            new QuestModule()
         );
 
         await this.moduleLoader.initialize();
