@@ -7,6 +7,7 @@ import { LoggerContext } from "./types/LoggerContext";
 import { ModuleLoader } from "./ModuleLoader";
 
 // Module 
+import { SystemModule } from "../modules/system/SystemModule";
 import { AuthModule } from "../modules/auth/AuthModule";
 import { CharacterModule } from "../modules/characters/CharacterModule";
 import { InventoryModule } from "../modules/inventory/InventoryModule";
@@ -14,7 +15,10 @@ import { ItemModule } from "../modules/item/ItemModule";
 import { EconomyModule } from "../modules/economy/EconomyModule";
 import { NpcModule } from "../modules/npcs/NpcModule";
 import { QuestModule } from "../modules/quests/QuestModule";
-import { PlayerQuest } from "../modules/player-quest/models/PlayerQuest";
+import { PlayerQuestModule } from "../modules/player-quest/PlayerQuestModule";
+
+
+import { Bridge } from "../bridge/Bridge";
 
 /* 
 Uma observação importante para nossa arquitetura
@@ -42,6 +46,8 @@ Ela não muda nenhuma API pública e deixará a arquitetura mais limpa.
 export class Application {
 
     private readonly moduleLoader = new ModuleLoader();
+
+    private readonly bridge = new Bridge();
 
     private async initializeModules(): Promise<void> {
 
@@ -73,6 +79,14 @@ export class Application {
             new QuestModule()
         );
 
+        this.moduleLoader.register(
+            new PlayerQuestModule()
+        );
+
+        this.moduleLoader.register(
+            new SystemModule()
+        );
+
         await this.moduleLoader.initialize();
 
     }
@@ -82,6 +96,8 @@ export class Application {
         await this.initializeDatabase();
 
         await this.initializeModules();
+
+        await this.bridge.start();
 
         this.startHttp();
 

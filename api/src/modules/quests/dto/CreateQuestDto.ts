@@ -10,4 +10,6 @@ export interface CreateQuestDto {
 
     requiredProgress: number;
 
+    rewardGold: number;
+
 }

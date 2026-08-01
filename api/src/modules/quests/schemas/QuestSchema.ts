@@ -44,6 +44,16 @@ const QuestSchema = new Schema({
 
     },
 
+    rewardGold: {
+
+        type: Number,
+
+        required: true,
+
+        default: 0
+
+    },
+
     enabled: {
 
         type: Boolean,

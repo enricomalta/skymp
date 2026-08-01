@@ -1,8 +1,8 @@
 {
   "angle": [
-    33.03450012207031,
+    46.035560607910156,
     0.0,
-    350.18975830078125
+    81.73334503173828
   ],
   "appearanceDump": {
     "hairColor": 1053202,
@@ -240,80 +240,6 @@
           "baseId": 79760,
           "count": 1,
           "worn": true
-        },
-        {
-          "baseId": 77494,
-          "count": 1,
-          "name": "Iron Shield"
-        },
-        {
-          "baseId": 77495,
-          "count": 1,
-          "name": "Iron Sword"
-        },
-        {
-          "baseId": 80254,
-          "count": 1,
-          "name": "Iron Dagger"
-        },
-        {
-          "baseId": 243042,
-          "count": 1,
-          "name": "Long Bow"
-        },
-        {
-          "baseId": 256810,
-          "count": 1,
-          "name": "Potion of the Warrior"
-        },
-        {
-          "baseId": 256819,
-          "count": 1,
-          "name": "Potion of Light Feet"
-        },
-        {
-          "baseId": 1017598,
-          "count": 1,
-          "name": "The Book of the Dragonborn"
-        },
-        {
-          "baseId": 120044,
-          "count": 2,
-          "name": "Torch"
-        },
-        {
-          "baseId": 236362,
-          "count": 2,
-          "name": "Potion of Resist Fire"
-        },
-        {
-          "baseId": 256733,
-          "count": 5,
-          "name": "Potion of Minor Healing"
-        },
-        {
-          "baseId": 256736,
-          "count": 5,
-          "name": "Potion of Minor Magicka"
-        },
-        {
-          "baseId": 256741,
-          "count": 5,
-          "name": "Potion of Minor Stamina"
-        },
-        {
-          "baseId": 10,
-          "count": 10,
-          "name": "Lockpick"
-        },
-        {
-          "baseId": 80253,
-          "count": 23
-        },
-        {
-          "baseId": 15,
-          "count": 140,
-          "name": "gold"
         }
       ]
     },
@@ -411,7 +337,7 @@
   },
   "isDead": false,
   "isDeleted": false,
-  "isDisabled": true,
+  "isDisabled": false,
   "isHarvested": false,
   "isOpen": false,
   "isRaceMenuOpen": false,
@@ -420,9 +346,9 @@
   "magickaRespawnPercentage": 1.0,
   "nextRelootDatetime": 0,
   "position": [
-    133930.34375,
-    -61459.84375,
-    14696.1259765625
+    133599.5,
+    -61162.06640625,
+    14540.8017578125
   ],
   "profileId": 1,
   "recType": 1,

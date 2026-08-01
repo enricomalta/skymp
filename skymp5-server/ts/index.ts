@@ -22,6 +22,7 @@ import { Spawn } from "./systems/spawn";
 import { Login } from "./systems/login";
 import { DiscordBanSystem } from "./systems/discordBanSystem";
 import { MasterApiBalanceSystem } from "./systems/masterApiBalanceSystem";
+import { ApiBridge } from "./systems/apiBridge";
 import { EventEmitter } from "events";
 import { pid } from "process";
 import * as fs from "fs";
@@ -193,6 +194,7 @@ const main = async () => {
   systems.push(
     new MetricsSystem(),
     new MasterClient(log, port, master, maxPlayers, name, masterKey, 5000, offlineMode),
+    new ApiBridge(),
     new Spawn(log),
     new Login(log, maxPlayers, master, port, masterKey, offlineMode),
     new DiscordBanSystem(),

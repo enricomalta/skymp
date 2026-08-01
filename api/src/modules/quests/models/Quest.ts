@@ -12,6 +12,8 @@ export interface Quest {
 
     requiredProgress: number;
 
+    rewardGold: number;
+
     enabled: boolean;
 
     createdAt: Date;
