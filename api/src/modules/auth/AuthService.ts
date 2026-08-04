@@ -6,22 +6,26 @@ import { Account } from "./models/Account";
 
 import { CreateAccountDto } from "./dto/CreateAccountDto";
 import { LoginDto } from "./dto/LoginDto";
-
+import { JwtService } from "./JwtService";
+import { LoginResponseDto } from "./dto/LoginResponseDto";
+import { ValidateTokenResponseDto } from "./dto/ValidateTokenResponseDto";
 export class AuthService {
 
     private readonly repository = new AuthRepository();
+
+    private readonly jwtService = new JwtService();
 
     public async createAccount(
         dto: CreateAccountDto
     ): Promise<Account> {
 
-        const exists = await this.repository.findByUsername(
-            dto.username
+        const exists = await this.repository.findByEmail(
+            dto.email
         );
 
         if (exists) {
 
-            throw new Error("Nome de usuário já existe.");
+            throw new Error("Email já cadastrado.");
 
         }
 
@@ -29,7 +33,7 @@ export class AuthService {
 
         return this.repository.create({
 
-            username: dto.username,
+            email: dto.email,
 
             password
 
@@ -39,10 +43,10 @@ export class AuthService {
 
     public async login(
         dto: LoginDto
-    ): Promise<Account> {
+    ): Promise<LoginResponseDto> {
 
-        const account = await this.repository.findByUsername(
-            dto.username
+        const account = await this.repository.findByEmail(
+            dto.email
         );
 
         if (!account) {
@@ -65,17 +69,75 @@ export class AuthService {
 
         }
 
-        return account;
+        const jwtService = new JwtService();
+
+        const token = jwtService.generate(
+            account
+        );
+
+        return {
+
+            token,
+
+            account: {
+
+                id: account.id,
+
+                email: account.email,
+
+                createdAt: account.createdAt
+
+            }
+
+        };
 
     }
 
-    public async findByUsername(
-        username: string
+    public async findByEmail(
+        email: string
     ): Promise<Account | null> {
 
-        return this.repository.findByUsername(
-            username
+        return this.repository.findByEmail(
+            email
         );
+
+    }
+
+    public async validate(
+        token: string
+    ): Promise<ValidateTokenResponseDto> {
+
+        const payload = this.jwtService.validate(
+            token
+        );
+
+        const account = await this.repository.findById(
+            payload.accountId
+        );
+
+        if (!account) {
+
+            throw new Error(
+                "Conta não encontrada."
+            );
+
+        }
+
+        return {
+
+            valid: true,
+
+            account: {
+
+                id: account.id,
+
+                email: account.email,
+
+                createdAt: account.createdAt
+
+            }
+
+        };
 
     }
 

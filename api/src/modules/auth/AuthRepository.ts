@@ -9,17 +9,17 @@ export class AuthRepository {
 
         return {
             id: created.id,
-            username: created.username,
+            email: created.email,
             password: created.password,
             createdAt: created.createdAt
         };
 
     }
 
-    public async findByUsername(username: string): Promise<Account | null> {
+    public async findByEmail(email: string): Promise<Account | null> {
 
         const account = await AccountModel.findOne({
-            username
+            email
         });
 
         if (!account) {
@@ -30,10 +30,20 @@ export class AuthRepository {
 
         return {
             id: account.id,
-            username: account.username,
+            email: account.email,
             password: account.password,
             createdAt: account.createdAt
         };
+
+    }
+
+    public async findById(
+        id: string
+    ): Promise<Account | null> {
+
+        return AccountModel.findById(
+            id
+        );
 
     }
 

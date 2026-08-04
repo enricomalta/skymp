@@ -51,6 +51,7 @@ export class InventoryService {
 
         }
 
+
         const item = inventory.items.find(
             item => item.itemId === dto.itemId
         );

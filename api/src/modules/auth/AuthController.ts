@@ -26,6 +26,11 @@ export class AuthController {
             this.login.bind(this)
         );
 
+        this.router.post(
+            "/validate",
+            this.validate.bind(this)
+        );
+
     }
 
     private async register(
@@ -76,6 +81,62 @@ export class AuthController {
                 message: error instanceof Error
                     ? error.message
                     : "Erro interno."
+            });
+
+        }
+
+    }
+
+    private async validate(
+        req: Request,
+        res: Response
+    ): Promise<void> {
+
+        try {
+
+            const authorization = req.headers.authorization;
+
+            if (!authorization) {
+
+                res.status(401).json({
+
+                    success: false,
+
+                    message: "Token não informado."
+
+                });
+
+                return;
+
+            }
+
+            const token = authorization.replace(
+                "Bearer ",
+                ""
+            );
+
+            const account = await this.service.validate(
+                token
+            );
+
+            res.status(200).json({
+
+                success: true,
+
+                data: account
+
+            });
+
+        } catch (error) {
+
+            res.status(401).json({
+
+                success: false,
+
+                message: error instanceof Error
+                    ? error.message
+                    : "Token inválido."
+
             });
 
         }
