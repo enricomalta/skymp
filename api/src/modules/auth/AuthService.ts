@@ -141,4 +141,16 @@ export class AuthService {
 
     }
 
+    public async getSkyMpProfile(token: string): Promise<{ id: number; discordId: null }> {
+
+        const payload = this.jwtService.validate(token);
+        const profileId = await this.repository.getOrAssignProfileId(payload.accountId);
+
+        return {
+            id: profileId,
+            discordId: null
+        };
+
+    }
+
 }

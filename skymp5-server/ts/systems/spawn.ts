@@ -97,9 +97,10 @@ export class Spawn implements System {
       const session = { userId, profileId, actorId };
       this.sessions.set(actorId, session);
       ctx.svr.setUserActor(userId, actorId);
-      // Temporary world-selection aid: lets the player use `coc <cell>` in
-      // the Skyrim console, then Mongo captures the resulting location.
-      mp.set(actorId, "consoleCommandsAllowed", true);
+      // Server-side console commands can create items, actors and alter the
+      // world, so grant them only to explicitly configured administrators.
+      // Never enable this for every player just to use the local `coc` command.
+      mp.set(actorId, "consoleCommandsAllowed", settings.adminProfileIds.includes(profileId));
 
       if (character) {
         this.hydrate(actorId, character, mp);

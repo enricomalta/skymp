@@ -27,6 +27,8 @@ export class Settings {
   loadOrder = new Array<string>();
   dataDir = './data';
   offlineMode = false;
+  /** Profile IDs allowed to execute server-side console commands. */
+  adminProfileIds: number[] = [];
   startPoints = [
     {
       pos: [133857, -61130, 14662],
@@ -71,6 +73,7 @@ export class Settings {
       'dataDir',
       'startPoints',
       'offlineMode',
+      'adminProfileIds',
       'discordAuth',
     ].forEach((prop) => {
       if (settings[prop]) {

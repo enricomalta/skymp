@@ -1,6 +1,7 @@
 import express from "express";
 import { SystemController } from "./modules/system/SystemController";
 import { AuthController } from "./modules/auth/AuthController";
+import { SkyMpSessionController } from "./modules/auth/SkyMpSessionController";
 import { CharacterController } from "./modules/characters/CharacterController";
 import { InventoryController } from "./modules/inventory/InventoryController";
 import { ItemController } from "./modules/item/ItemController";
@@ -16,6 +17,7 @@ app.use(express.json());
 
 const systemController = new SystemController();
 const authController = new AuthController();
+const skyMpSessionController = new SkyMpSessionController();
 const characterController = new CharacterController();
 const inventoryController = new InventoryController();
 const itemController = new ItemController();
@@ -30,6 +32,10 @@ app.use("/system", systemController.router);
 app.use("/anticheat",antiCheatRoutes);
 
 app.use("/auth", authController.router);
+
+// Compatibility surface consumed by the SkyMP server while authenticating a
+// launcher-issued JWT. Do not expose a local profileId to the game client.
+app.use("/api", skyMpSessionController.router);
 
 app.use("/characters", characterController.router);
 

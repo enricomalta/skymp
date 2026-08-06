@@ -8,12 +8,15 @@
     "D:/SteamLibrary/steamapps/common/Skyrim Special Edition/Data/HearthFires.esm",
     "D:/SteamLibrary/steamapps/common/Skyrim Special Edition/Data/Dragonborn.esm"
   ],
-  "master" : "",
+  "master" : "http://127.0.0.1:3001",
+  "masterKey": "terras-alem-20260806-7f3b9c24a1de",
   "maxPlayers" : 100,
   "name" : "My Server",
   "npcEnabled" : false,
   "npcSettings" : {},
-  "offlineMode" : true,
+  "enableConsoleCommandsForAll": false,
+  "adminProfileIds": [1],
+  "offlineMode" : false,
   "ip": "127.0.0.1",
   "port" : 7777
 }

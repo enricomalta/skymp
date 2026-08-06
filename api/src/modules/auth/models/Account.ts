@@ -6,6 +6,8 @@ export interface Account {
 
     password: string;
 
+    profileId?: number;
+
     createdAt: Date;
 
 }

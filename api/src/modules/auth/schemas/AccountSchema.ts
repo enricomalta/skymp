@@ -18,6 +18,18 @@ const AccountSchema = new Schema({
 
         required: true
 
+    },
+
+    // Numeric identity used by SkyMP. It is deliberately separate from the
+    // Mongo ObjectId used by the launcher/API.
+    profileId: {
+
+        type: Number,
+
+        unique: true,
+
+        sparse: true
+
     }
 
 }, {

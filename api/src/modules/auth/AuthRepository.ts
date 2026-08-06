@@ -47,4 +47,41 @@ export class AuthRepository {
 
     }
 
+    public async getOrAssignProfileId(accountId: string): Promise<number> {
+
+        const account = await AccountModel.findById(accountId);
+
+        if (!account) {
+            throw new Error("Conta n\u00e3o encontrada.");
+        }
+
+        if (typeof account.profileId === "number") {
+            return account.profileId;
+        }
+
+        // The existing installation only has the administrator account. Giving
+        // the first unmapped account profile 1 preserves its current character.
+        const latest = await AccountModel
+            .findOne({ profileId: { $type: "double" } })
+            .sort({ profileId: -1 })
+            .select({ profileId: 1 });
+
+        account.profileId = (latest?.profileId ?? 0) + 1;
+
+        try {
+            await account.save();
+        } catch (error: unknown) {
+            // A concurrent first login may allocate the same value. Fetch the
+            // document again before surfacing an actual persistence error.
+            const refreshed = await AccountModel.findById(accountId);
+            if (typeof refreshed?.profileId === "number") {
+                return refreshed.profileId;
+            }
+            throw error;
+        }
+
+        return account.profileId;
+
+    }
+
 }

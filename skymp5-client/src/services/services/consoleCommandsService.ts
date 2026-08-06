@@ -13,13 +13,13 @@ enum CmdArgument {
     String,
 }
 
-type CmdName = "additem" | "equipitem" | "placeatme" | "disable" | "mp";
+type CmdName = "additem" | "equipitem" | "placeatme" | "disable" | "mp" | "tp";
 
 export class ConsoleCommandsService extends ClientListener {
     constructor(private sp: Sp, private controller: CombinedController) {
         super();
         this.schemas = ConsoleCommandsService.createSchemas();
-        this.setupMpCommand();
+        this.setupTeleportCommand();
         this.setupVanilaCommands();
     }
 
@@ -30,18 +30,21 @@ export class ConsoleCommandsService extends ClientListener {
         schemas.set("placeatme", [CmdArgument.ObjectReference, CmdArgument.BaseForm]);
         schemas.set("disable", [CmdArgument.ObjectReference]);
         schemas.set("mp", [CmdArgument.ObjectReference, CmdArgument.String]);
+        schemas.set("tp", [CmdArgument.String]);
         return schemas;
     }
 
-    private setupMpCommand() {
-        const command = this.sp.findConsoleCommand(" ConfigureUM") || this.sp.findConsoleCommand("test");
+    private setupTeleportCommand() {
+        // Skyrim Platform can replace existing console commands, but cannot
+        // register a new command name at runtime. Reuse the built-in `coc`
+        // command so the request always reaches the authoritative server.
+        const command = this.sp.findConsoleCommand("coc");
         if (command === null) {
-            logError(this, "command was null in setupMpCommand");
+            logError(this, "command was null in setupTeleportCommand");
             return;
         }
 
-        command.shortName = "mp";
-        command.execute = this.getCommandExecutor("mp");
+        command.execute = this.getCommandExecutor("tp");
     }
 
     private setupVanilaCommands() {
@@ -69,6 +72,17 @@ export class ConsoleCommandsService extends ClientListener {
             if (schema === undefined) {
                 logError(this, `Schema not found for command`, commandName);
                 return false;
+            }
+
+            // `coc` invokes its callback with engine-specific extra values.
+            // The server command accepts only the textual destination.
+            if (commandName === "tp") {
+                const destination = args.find(value => typeof value === "string" && value.trim().length > 0);
+                if (destination === undefined) {
+                    logError(this, "Teleport destination is missing");
+                    return false;
+                }
+                args = [destination];
             }
 
             if (args.length !== schema.length && !this.immuneSchema.includes(commandName)) {

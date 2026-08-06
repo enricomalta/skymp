@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LoggerContext = void 0;
+var LoggerContext;
+(function (LoggerContext) {
+    LoggerContext["SYSTEM"] = "SYSTEM";
+    LoggerContext["DATABASE"] = "DATABASE";
+    LoggerContext["HTTP"] = "HTTP";
+    LoggerContext["AUTH"] = "AUTH";
+    LoggerContext["PLAYER"] = "PLAYER";
+    LoggerContext["CHARACTER"] = "CHARACTER";
+    LoggerContext["INVENTORY"] = "INVENTORY";
+    LoggerContext["ECONOMY"] = "ECONOMY";
+    LoggerContext["GUILD"] = "GUILD";
+    LoggerContext["HOUSE"] = "HOUSE";
+    LoggerContext["QUEST"] = "QUEST";
+    LoggerContext["ADMIN"] = "ADMIN";
+    LoggerContext["MODULE"] = "MODULE";
+    LoggerContext["EVENT"] = "EVENT";
+    LoggerContext["CONFIG"] = "CONFIG";
+    LoggerContext["SKYMP"] = "SKYMP";
+})(LoggerContext || (exports.LoggerContext = LoggerContext = {}));

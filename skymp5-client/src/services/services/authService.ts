@@ -129,6 +129,27 @@ export class AuthService extends ClientListener {
     logTrace(this, `Received authNeeded event`);
 
     const settingsGameData = this.sp.settings["skymp5-client"]["gameData"] as any;
+    const launcherToken = this.sp.settings["skymp5-client"]["launcher-token"] as unknown;
+
+    // Terras Alem's launcher owns authentication. It writes its short-lived JWT
+    // immediately before starting SKSE, so the client never has to use the
+    // insecure local profileId authentication mode.
+    if (typeof launcherToken === "string" && launcherToken.trim().length > 0) {
+      logTrace(this, `Launcher token detected, emitting remote auth event`);
+      this.controller.emitter.emit("authAttempt", {
+        authGameData: {
+          remote: {
+            session: launcherToken,
+            masterApiId: 0,
+            discordUsername: null,
+            discordDiscriminator: null,
+            discordAvatar: null,
+          },
+        },
+      });
+      return;
+    }
+
     const isOfflineMode = Number.isInteger(settingsGameData?.profileId);
     if (isOfflineMode) {
       logTrace(this, `Offline mode detected in settings, emitting auth event with authGameData.local`);

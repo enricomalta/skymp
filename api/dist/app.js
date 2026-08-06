@@ -1,0 +1,43 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const SystemController_1 = require("./modules/system/SystemController");
+const AuthController_1 = require("./modules/auth/AuthController");
+const SkyMpSessionController_1 = require("./modules/auth/SkyMpSessionController");
+const CharacterController_1 = require("./modules/characters/CharacterController");
+const InventoryController_1 = require("./modules/inventory/InventoryController");
+const ItemController_1 = require("./modules/item/ItemController");
+const EconomyController_1 = require("./modules/economy/EconomyController");
+const NpcController_1 = require("./modules/npcs/NpcController");
+const QuestController_1 = require("./modules/quests/QuestController");
+const PlayerQuestController_1 = require("./modules/player-quest/PlayerQuestController");
+const AntiCheatRoutes_1 = __importDefault(require("./modules/anticheat/AntiCheatRoutes"));
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+const systemController = new SystemController_1.SystemController();
+const authController = new AuthController_1.AuthController();
+const skyMpSessionController = new SkyMpSessionController_1.SkyMpSessionController();
+const characterController = new CharacterController_1.CharacterController();
+const inventoryController = new InventoryController_1.InventoryController();
+const itemController = new ItemController_1.ItemController();
+const economyController = new EconomyController_1.EconomyController();
+const npcController = new NpcController_1.NpcController();
+const questController = new QuestController_1.QuestController();
+const playerQuestController = new PlayerQuestController_1.PlayerQuestController();
+app.use("/system", systemController.router);
+app.use("/anticheat", AntiCheatRoutes_1.default);
+app.use("/auth", authController.router);
+// Compatibility surface consumed by the SkyMP server while authenticating a
+// launcher-issued JWT. Do not expose a local profileId to the game client.
+app.use("/api", skyMpSessionController.router);
+app.use("/characters", characterController.router);
+app.use("/inventories", inventoryController.router);
+app.use("/items", itemController.router);
+app.use("/economy", economyController.router);
+app.use("/npcs", npcController.router);
+app.use("/quests", questController.router);
+app.use("/player-quests", playerQuestController.router);
+exports.default = app;

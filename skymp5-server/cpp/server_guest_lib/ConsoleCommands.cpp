@@ -170,6 +170,24 @@ void ExecuteMp(MpActor& caller,
     return ExecuteDisable(caller, args);
   }
 }
+
+void ExecuteTeleport(MpActor& caller,
+                     const std::vector<ConsoleCommands::Argument>& args)
+{
+  EnsureAdmin(caller);
+
+  const auto& destination = args.at(0).GetString();
+  if (!Utils::stricmp(destination.data(), "riverwood")) {
+    // Riverwood exterior, near the village center. This is applied by the
+    // server, which also sends the teleport packet to the requesting client.
+    caller.Teleport({ { 30777.f, 65914.f, 10524.f }, { 0.f, 0.f, 0.f },
+                      FormDesc::FromString("3c:Skyrim.esm") });
+    return;
+  }
+
+  throw std::runtime_error("Unknown teleport destination '" + destination +
+                           "'. Available destinations: riverwood");
+}
 }
 
 void ConsoleCommands::Execute(
@@ -186,6 +204,8 @@ void ConsoleCommands::Execute(
     ExecuteDisable(me, args);
   } else if (!Utils::stricmp(consoleCommandName.data(), "Mp")) {
     ExecuteMp(me, args);
+  } else if (!Utils::stricmp(consoleCommandName.data(), "Tp")) {
+    ExecuteTeleport(me, args);
   } else {
     throw std::runtime_error("Unknown command name '" + consoleCommandName +
                              "'");
