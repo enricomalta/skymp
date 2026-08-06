@@ -8,7 +8,7 @@ import { EconomyController } from "./modules/economy/EconomyController";
 import { NpcController } from "./modules/npcs/NpcController";
 import { QuestController } from "./modules/quests/QuestController";
 import { PlayerQuestController } from "./modules/player-quest/PlayerQuestController";
-
+import antiCheatRoutes from "./modules/anticheat/AntiCheatRoutes";
 
 const app = express();
 
@@ -26,6 +26,8 @@ const playerQuestController = new PlayerQuestController();
 
 
 app.use("/system", systemController.router);
+
+app.use("/anticheat",antiCheatRoutes);
 
 app.use("/auth", authController.router);
 

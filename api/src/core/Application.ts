@@ -16,6 +16,7 @@ import { EconomyModule } from "../modules/economy/EconomyModule";
 import { NpcModule } from "../modules/npcs/NpcModule";
 import { QuestModule } from "../modules/quests/QuestModule";
 import { PlayerQuestModule } from "../modules/player-quest/PlayerQuestModule";
+import { AntiCheatModule } from "../modules/anticheat/AntiCheatModule";
 
 
 import { Bridge } from "../bridge/Bridge";
@@ -85,6 +86,10 @@ export class Application {
 
         this.moduleLoader.register(
             new SystemModule()
+        );
+
+        this.moduleLoader.register(
+            new AntiCheatModule()
         );
 
         await this.moduleLoader.initialize();

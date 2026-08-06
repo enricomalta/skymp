@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-
+import { SaveCharacterDto } from "./dto/SaveCharacterDto";
 import { CharacterService } from "./CharacterService";
 
 export class CharacterController {
@@ -27,8 +27,28 @@ export class CharacterController {
         );
 
         this.router.get(
+            "/load/:profileId",
+            this.load.bind(this)
+        );
+
+        this.router.get(
             "/:id",
             this.findById.bind(this)
+        );
+
+        this.router.get(
+            "/load/:profileId",
+            this.loadCharacter.bind(this)
+        );
+
+        this.router.put(
+            "/save/:profileId",
+            this.save.bind(this)
+        );
+
+        this.router.put(
+            "/:id",
+            this.save.bind(this)
         );
 
     }
@@ -129,4 +149,139 @@ export class CharacterController {
 
     }
 
+    private async load(
+        req: Request,
+        res: Response
+    ): Promise<void> {
+
+        try {
+
+            const profileId = Number(
+                req.params.profileId
+            );
+
+            const character =
+                await this.service.findByProfileId(
+                    profileId
+                );
+
+            if (!character) {
+
+                res.status(404).json({
+
+                    success: false,
+
+                    message: "Personagem não encontrado."
+
+                });
+
+                return;
+
+            }
+
+            res.status(200).json({
+
+                success: true,
+
+                data: character
+
+            });
+
+        } catch (error) {
+
+            res.status(400).json({
+
+                success: false,
+
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Erro interno."
+
+            });
+
+        }
+
+    }
+
+    private async loadCharacter(
+        req: Request,
+        res: Response
+    ): Promise<void> {
+
+        try {
+
+            const profileId = Number(req.params.profileId);
+
+            const character =
+                await this.service.loadCharacter(profileId);
+
+            if (!character) {
+
+                res.status(404).json({
+                    success: false,
+                    message: "Personagem não encontrado."
+                });
+
+                return;
+
+            }
+
+            res.status(200).json({
+                success: true,
+                data: character
+            });
+
+        } catch (error) {
+
+            res.status(400).json({
+                success: false,
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "Erro interno."
+            });
+
+        }
+
+    }
+
+    private async save(
+        req: Request,
+        res: Response
+    ): Promise<void> {
+
+        try {
+
+            const character = await this.service.saveCharacter(
+
+                req.params.id,
+
+                req.body
+
+            );
+
+            res.status(200).json({
+
+                success: true,
+
+                data: character
+
+            });
+
+        } catch (error) {
+
+            res.status(400).json({
+
+                success: false,
+
+                message: error instanceof Error
+                    ? error.message
+                    : "Erro interno."
+
+            });
+
+        }
+
+    }
 }

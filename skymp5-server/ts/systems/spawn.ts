@@ -1,5 +1,6 @@
 import { Settings } from "../settings";
 import { System, Log, SystemContext } from "./system";
+import { ApiBridge } from "./apiBridge";
 
 type Mp = any; // TODO
 
@@ -14,7 +15,34 @@ export class Spawn implements System {
 
   async initAsync(ctx: SystemContext): Promise<void> {
     const settingsObject = await Settings.get();
-    const listenerFn = (userId: number, userProfileId: number, discordRoleIds: string[], discordId?: string) => {
+    const listenerFn = async (
+      userId: number,
+      userProfileId: number,
+      discordRoleIds: string[],
+      discordId?: string
+    ) => {
+      try {
+
+          const characterApi = ApiBridge.getCharacterApi();
+
+          const character = await characterApi.loadCharacter(
+              userProfileId.toString()
+          );
+
+          console.log(
+              "[CharacterApi] Resposta:",
+              JSON.stringify(character, null, 2)
+          );
+
+      } catch (error) {
+
+          console.error(
+              "[CharacterApi] Erro ao carregar personagem:"
+          );
+
+          console.error(error);
+
+      }
       const { startPoints } = settingsObject;
       // TODO: Show race menu if character is not created after relogging
       let actorId = ctx.svr.getActorsByProfileId(userProfileId)[0];

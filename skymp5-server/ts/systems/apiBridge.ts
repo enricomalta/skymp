@@ -1,6 +1,7 @@
 import { System, SystemContext } from "./system";
 
 import { ApiClient } from "../api/ApiClient";
+import { CharacterApi } from "../api/CharacterApi";
 
 interface HealthResponse {
 
@@ -13,6 +14,8 @@ export class ApiBridge implements System {
     public systemName = "ApiBridge";
 
     private static client: ApiClient;
+
+    private static characterApi: CharacterApi;
 
     public static getClient(): ApiClient {
 
@@ -28,12 +31,30 @@ export class ApiBridge implements System {
 
     }
 
+    public static getCharacterApi(): CharacterApi {
+
+        if (!ApiBridge.characterApi) {
+
+            throw new Error(
+                "CharacterApi ainda não foi inicializado."
+            );
+
+        }
+
+        return ApiBridge.characterApi;
+
+    }
+
     public async initAsync(
         ctx: SystemContext
     ): Promise<void> {
 
         ApiBridge.client = new ApiClient(
             "http://localhost:3001"
+        );
+
+        ApiBridge.characterApi = new CharacterApi(
+            ApiBridge.client
         );
 
         console.log("[ApiBridge] Inicializado.");

@@ -1,18 +1,4 @@
-export interface Character {
-
-    id: string;
-
-    profileId: number;
-
-    accountId: string;
-
-    name: string;
-
-    race: string;
-
-    sex: "male" | "female";
-
-    level: number;
+export interface SaveCharacterDto {
 
     position: {
 
@@ -37,6 +23,12 @@ export interface Character {
     world: string;
 
     cell: string | null;
+
+    health: number;
+
+    magicka: number;
+
+    stamina: number;
 
     gold: number;
 
@@ -67,6 +59,8 @@ export interface Character {
     };
 
 
+    skills: Record<string, number>;
+
     attributes: {
 
         health: number;
@@ -86,7 +80,6 @@ export interface Character {
         kills: number;
 
     };
-
 
     quests: {
 
@@ -158,57 +151,8 @@ export interface Character {
 
     };
 
-
     skillPoints: number;
 
     perkPoints: number;
-
-    skills: {
-
-        oneHanded: number;
-
-        twoHanded: number;
-
-        archery: number;
-
-        block: number;
-
-        smithing: number;
-
-        heavyArmor: number;
-
-        lightArmor: number;
-
-        pickpocket: number;
-
-        lockpicking: number;
-
-        sneak: number;
-
-        alchemy: number;
-
-        speech: number;
-
-        alteration: number;
-
-        conjuration: number;
-
-        destruction: number;
-
-        illusion: number;
-
-        restoration: number;
-
-        enchanting: number;
-
-    };
-
-    lastSave: Date;
-
-    createdAt: Date;
-
-    lastLogin: Date | null;
-
-    lastLogout: Date | null;
 
 }
