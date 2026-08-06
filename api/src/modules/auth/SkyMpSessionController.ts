@@ -13,10 +13,22 @@ export class SkyMpSessionController {
     private readonly service = new AuthService();
 
     constructor() {
+        // SkyMP sends this heartbeat every five seconds. This local master does
+        // not expose a server browser yet, but acknowledging it keeps the
+        // server healthy and leaves room for a future server registry.
+        this.router.post(
+            "/servers/:masterKey",
+            this.updateServerInfo.bind(this)
+        );
+
         this.router.get(
             "/servers/:masterKey/sessions/:session",
             this.getSession.bind(this)
         );
+    }
+
+    private async updateServerInfo(_req: Request, res: Response): Promise<void> {
+        res.status(200).json({ success: true });
     }
 
     private async getSession(req: Request, res: Response): Promise<void> {

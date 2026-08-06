@@ -40,7 +40,7 @@ class AuthRepository {
         // The existing installation only has the administrator account. Giving
         // the first unmapped account profile 1 preserves its current character.
         const latest = await AccountSchema_1.AccountModel
-            .findOne({ profileId: { $type: "number" } })
+            .findOne({ profileId: { $type: "double" } })
             .sort({ profileId: -1 })
             .select({ profileId: 1 });
         account.profileId = (latest?.profileId ?? 0) + 1;
