@@ -124,7 +124,7 @@ export class PlayerQuestRepository {
 
             {
 
-                new: true
+                returnDocument: "after"
 
             }
 

@@ -4,9 +4,9 @@ const CharacterSchema = new Schema({
 
     accountId: {
 
-        type: Schema.Types.ObjectId,
-
-        ref: "Account",
+        // SkyMP provides a numeric master-profile id, not an Auth Account
+        // ObjectId. Keep it as a string so creation after RaceMenu is valid.
+        type: String,
 
         required: true
 
@@ -179,82 +179,15 @@ const CharacterSchema = new Schema({
     },
 
     inventory: {
-
-        type: [
-
-            String
-
-        ],
-
-        default: []
+        // Native SkyMP inventory includes entry metadata and worn state.
+        type: Schema.Types.Mixed,
+        default: { entries: [] }
 
     },
 
     equipment: {
-
-        head: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        body: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        hands: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        feet: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        shield: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        weapon: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        ring: {
-
-            type: String,
-
-            default: null
-
-        },
-
-        necklace: {
-
-            type: String,
-
-            default: null
-
-        }
+        type: Schema.Types.Mixed,
+        default: {}
 
     },
 

@@ -4,43 +4,34 @@ export interface CreateCharacterRequest {
 
     accountId: string;
 
+    profileId: number;
+
     name: string;
 
     race: string;
 
+    sex: "male" | "female";
+
+    appearance: unknown;
+
+    weight: number;
+
 }
 
 export interface SaveCharacterRequest {
-
-    accountId: string;
-
-    position: {
-
-        x: number;
-
-        y: number;
-
-        z: number;
-
-    };
-
-    rotation: {
-
-        x: number;
-
-        y: number;
-
-        z: number;
-
-    };
-
-    level: number;
-
-    health: number;
-
-    magicka: number;
-
-    stamina: number;
+    level?: number;
+    position?: { x: number; y: number; z: number; };
+    rotation?: { x: number; y: number; z: number; };
+    world?: string;
+    cell?: string | null;
+    health?: number;
+    magicka?: number;
+    stamina?: number;
+    appearance?: unknown;
+    inventory?: unknown;
+    equipment?: unknown;
+    attributes?: unknown;
+    quests?: unknown;
 
 }
 
@@ -72,11 +63,12 @@ export class CharacterApi {
     }
 
     public async saveCharacter(
+        profileId: number,
         request: SaveCharacterRequest
     ): Promise<any> {
 
         return this.api.put(
-            "/characters/save",
+            `/characters/save/${profileId}`,
             request
         );
 

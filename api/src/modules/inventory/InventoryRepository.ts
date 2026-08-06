@@ -75,7 +75,7 @@ export class InventoryRepository {
 
             {
 
-                new: true
+                returnDocument: "after"
 
             }
 

@@ -76,7 +76,7 @@ export class CharacterService {
 
             appearance: dto.appearance,
 
-            inventory: dto.inventory,
+            inventory: dto.inventory ?? { entries: [] },
 
             equipment: dto.equipment,
 
@@ -180,5 +180,27 @@ export class CharacterService {
             character
         );
 
+    }
+
+    /**
+     * SkyMP identifies a player by its master profile id.  This is the only
+     * update path used by the game server, so Mongo is the source of truth
+     * for player state rather than the native ChangeForm id.
+     */
+    public async saveCharacterByProfileId(
+        profileId: number,
+        dto: Partial<SaveCharacterDto> & { level?: number }
+    ): Promise<Character> {
+
+        const character = await this.repository.findByProfileId(profileId);
+
+        if (!character) {
+            throw new Error("Personagem não encontrado.");
+        }
+
+        Object.assign(character, dto);
+        character.lastSave = new Date();
+
+        return this.repository.save(character);
     }
 }

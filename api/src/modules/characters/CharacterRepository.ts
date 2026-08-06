@@ -286,7 +286,7 @@ export class CharacterRepository {
 
                 {
 
-                    new: true
+                    returnDocument: "after"
 
                 }
 
@@ -392,7 +392,7 @@ export class CharacterRepository {
 
             {
 
-                new: true,
+                returnDocument: "after",
 
                 runValidators: true
 

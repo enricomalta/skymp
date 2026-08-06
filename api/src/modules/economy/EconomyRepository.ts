@@ -75,7 +75,7 @@ export class EconomyRepository {
 
             {
 
-                new: true
+                returnDocument: "after"
 
             }
 

@@ -21,6 +21,12 @@ export class CharacterController {
             this.create.bind(this)
         );
 
+        // Endpoint used by the SkyMP bridge.
+        this.router.post(
+            "/create",
+            this.create.bind(this)
+        );
+
         this.router.get(
             "/account/:accountId",
             this.findByAccount.bind(this)
@@ -43,11 +49,6 @@ export class CharacterController {
 
         this.router.put(
             "/save/:profileId",
-            this.save.bind(this)
-        );
-
-        this.router.put(
-            "/:id",
             this.save.bind(this)
         );
 
@@ -253,12 +254,14 @@ export class CharacterController {
 
         try {
 
-            const character = await this.service.saveCharacter(
-
-                req.params.id,
-
+            const profileId = Number(req.params.profileId);
+            if (!Number.isInteger(profileId)) {
+                res.status(400).json({ success: false, message: "profileId inválido." });
+                return;
+            }
+            const character = await this.service.saveCharacterByProfileId(
+                profileId,
                 req.body
-
             );
 
             res.status(200).json({
