@@ -180,9 +180,10 @@ void PartOne::SetUserActor(Networking::UserId userId, uint32_t actorFormId)
     auto& actor = worldState.GetFormAt<MpActor>(actorFormId);
 
     if (actor.IsDisabled()) {
-      std::stringstream ss;
-      ss << "Actor with id " << std::hex << actorFormId << " is disabled";
-      throw std::runtime_error(ss.str());
+      spdlog::warn("PartOne::SetUserActor {} - actor {:x} is disabled, ignoring attachment",
+                   userId, actorFormId);
+      serverState.actorsMap.Erase(userId);
+      return;
     }
 
     // Clear actor's hoster if any.

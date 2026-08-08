@@ -80,30 +80,55 @@ export class Spawn implements System {
 
     const listener = async (userId: number, profileId: number, roles: string[], discordId?: string) => {
       let character: StoredCharacter | undefined;
+      let characterLoadFailed = false;
+
       try {
         const response = await ApiBridge.getCharacterApi().loadCharacter(profileId.toString()) as { data?: StoredCharacter };
         character = response.data;
       } catch (error) {
+        characterLoadFailed = true;
         if (!isNotFound(error)) {
           console.error("[CharacterApi] Falha ao carregar personagem:", error);
-          return;
         }
       }
 
-      // Deliberately do not use getActorsByProfileId: it would recover the
-      // actor loaded from ChangeForms instead of the Mongo document.
       const start = settings.startPoints[randomInteger(0, settings.startPoints.length - 1)];
-      const actorId = ctx.svr.createActor(0, start.pos, start.angleZ, +start.worldOrCell, profileId);
-      const session = { userId, profileId, actorId };
+      const existingActorId = ctx.svr.getActorsByProfileId(profileId)[0];
+      let actorId = typeof existingActorId === "number" && existingActorId !== 0 ? existingActorId : undefined;
+      let reusedExistingActor = false;
+
+      if (actorId !== undefined) {
+        try {
+          ctx.svr.setEnabled(actorId, true);
+          reusedExistingActor = true;
+        } catch (error) {
+          this.log("Existing actor was unusable, creating a fresh actor", `${profileId}:${actorId.toString(16)}`);
+          actorId = undefined;
+        }
+      }
+
+      if (actorId === undefined) {
+        actorId = ctx.svr.createActor(0, start.pos, start.angleZ, +start.worldOrCell, profileId);
+      }
+
+      let session = { userId, profileId, actorId };
       this.sessions.set(actorId, session);
-      ctx.svr.setUserActor(userId, actorId);
-      // Server-side console commands can create items, actors and alter the
-      // world, so grant them only to explicitly configured administrators.
-      // Never enable this for every player just to use the local `coc` command.
+      try {
+        ctx.svr.setUserActor(userId, actorId);
+      } catch (error) {
+        this.log("User-actor attachment failed, creating a fresh actor", `${profileId}:${actorId.toString(16)}`);
+        actorId = ctx.svr.createActor(0, start.pos, start.angleZ, +start.worldOrCell, profileId);
+        session = { userId, profileId, actorId };
+        this.sessions.set(actorId, session);
+        ctx.svr.setUserActor(userId, actorId);
+      }
       mp.set(actorId, "consoleCommandsAllowed", settings.adminProfileIds.includes(profileId));
 
       if (character) {
         this.hydrate(actorId, character, mp);
+        ctx.svr.setEnabled(actorId, true);
+      } else if (characterLoadFailed && reusedExistingActor) {
+        this.log("Character API unavailable, reusing existing actor", actorId.toString(16));
         ctx.svr.setEnabled(actorId, true);
       } else {
         this.pendingCharacterCreation.set(actorId, profileId);
