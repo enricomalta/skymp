@@ -15,17 +15,9 @@ export class InventoryRepository {
 
         });
 
-        return {
-
-            id: created.id,
-
-            characterId: created.characterId.toString(),
-
-            items: created.items,
-
-            createdAt: created.createdAt
-
-        };
+        return this.toModel(
+            document
+        );
 
     }
 
@@ -45,17 +37,9 @@ export class InventoryRepository {
 
         }
 
-        return {
-
-            id: inventory.id,
-
-            characterId: inventory.characterId.toString(),
-
-            items: inventory.items,
-
-            createdAt: inventory.createdAt
-
-        };
+        return this.toModel(
+            document
+        );
 
     }
 
@@ -87,15 +71,39 @@ export class InventoryRepository {
 
         }
 
+        return this.toModel(
+            document
+        );
+
+    }
+
+    private toModel(
+        document: any
+    ): Inventory {
+
         return {
 
-            id: updated.id,
+            id:
+                document._id.toString(),
 
-            characterId: updated.characterId.toString(),
+            characterId:
+                document.characterId,
 
-            items: updated.items,
+            items:
+                document.items.map(
+                    (item: any) => ({
 
-            createdAt: updated.createdAt
+                        itemId:
+                            item.itemId,
+
+                        quantity:
+                            item.quantity
+
+                    })
+                ),
+
+            createdAt:
+                document.createdAt
 
         };
 

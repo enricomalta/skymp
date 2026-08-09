@@ -14,6 +14,7 @@ const ModuleLoader_1 = require("./ModuleLoader");
 const SystemModule_1 = require("../modules/system/SystemModule");
 const AuthModule_1 = require("../modules/auth/AuthModule");
 const CharacterModule_1 = require("../modules/characters/CharacterModule");
+const LevelModule_1 = require("../modules/level/LevelModule");
 const InventoryModule_1 = require("../modules/inventory/InventoryModule");
 const ItemModule_1 = require("../modules/item/ItemModule");
 const EconomyModule_1 = require("../modules/economy/EconomyModule");
@@ -50,6 +51,7 @@ class Application {
     async initializeModules() {
         this.moduleLoader.register(new AuthModule_1.AuthModule());
         this.moduleLoader.register(new CharacterModule_1.CharacterModule());
+        this.moduleLoader.register(new LevelModule_1.LevelModule());
         this.moduleLoader.register(new InventoryModule_1.InventoryModule());
         this.moduleLoader.register(new ItemModule_1.ItemModule());
         this.moduleLoader.register(new EconomyModule_1.EconomyModule());

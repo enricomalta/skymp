@@ -1,21 +1,27 @@
-import { Schema, model } from "mongoose";
+import mongoose, {
+    Document,
+    Schema
+} from "mongoose";
 
-const InventorySchema = new Schema({
+export interface InventoryDocument
+    extends Document {
 
-    characterId: {
+    characterId: string;
 
-        type: Schema.Types.ObjectId,
+    items: {
 
-        ref: "Character",
+        itemId: string;
 
-        required: true,
+        quantity: number;
 
-        unique: true
+    }[];
 
-    },
+    createdAt: Date;
 
-    items: [
+}
 
+const InventoryItemSchema =
+    new Schema(
         {
 
             itemId: {
@@ -32,21 +38,56 @@ const InventorySchema = new Schema({
 
                 required: true,
 
-                default: 1
+                min: 0
+
+            }
+
+        },
+
+        {
+            _id: false
+        }
+    );
+
+const InventorySchema =
+    new Schema<InventoryDocument>(
+        {
+
+            characterId: {
+
+                type: String,
+
+                required: true,
+
+                unique: true,
+
+                index: true
+
+            },
+
+            items: {
+
+                type: [
+                    InventoryItemSchema
+                ],
+
+                default: []
+
+            },
+
+            createdAt: {
+
+                type: Date,
+
+                default: Date.now
 
             }
 
         }
+    );
 
-    ]
-
-}, {
-
-    timestamps: true
-
-});
-
-export const InventoryModel = model(
-    "Inventory",
-    InventorySchema
-);
+export const InventoryModel =
+    mongoose.model<InventoryDocument>(
+        "Inventory",
+        InventorySchema
+    );

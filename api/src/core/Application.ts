@@ -10,14 +10,15 @@ import { ModuleLoader } from "./ModuleLoader";
 import { SystemModule } from "../modules/system/SystemModule";
 import { AuthModule } from "../modules/auth/AuthModule";
 import { CharacterModule } from "../modules/characters/CharacterModule";
+import { LevelModule } from "../modules/level/LevelModule";
 import { InventoryModule } from "../modules/inventory/InventoryModule";
+import { PvPSystem } from "../modules/PvP/PvPSystem";
 import { ItemModule } from "../modules/item/ItemModule";
 import { EconomyModule } from "../modules/economy/EconomyModule";
 import { NpcModule } from "../modules/npcs/NpcModule";
 import { QuestModule } from "../modules/quests/QuestModule";
 import { PlayerQuestModule } from "../modules/player-quest/PlayerQuestModule";
 import { AntiCheatModule } from "../modules/anticheat/AntiCheatModule";
-
 
 import { Bridge } from "../bridge/Bridge";
 
@@ -61,7 +62,15 @@ export class Application {
         );
 
         this.moduleLoader.register(
+            new LevelModule()
+        );
+
+        this.moduleLoader.register(
             new InventoryModule()
+        );
+
+        this.moduleLoader.register(
+            new PvPSystem()
         );
 
         this.moduleLoader.register(

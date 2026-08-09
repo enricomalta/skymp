@@ -416,6 +416,8 @@ export class CharacterRepository {
             race: updated.race,
             sex: updated.sex,
             level: updated.level,
+            gold: updated.gold,
+            experience: updated.experience,
             position: updated.position,
             rotation: updated.rotation,
             world: updated.world,

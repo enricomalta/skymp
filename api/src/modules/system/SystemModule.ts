@@ -1,8 +1,8 @@
-import { IModule } from "../../core/IModule";
+import { Module } from "../../core/Module";
 import { Logger } from "../../core/Logger";
 import { LoggerContext } from "../../core/types/LoggerContext";
 
-export class SystemModule implements IModule {
+export class SystemModule implements Module {
 
     public readonly name = "system";
 
