@@ -24,12 +24,14 @@ export class WarSystem {
     ) {}
 
     public startWar(
+        id: string,
         clanAId: string,
         clanBId: string
     ) {
 
         const war =
             this.warService.startWar(
+                id,
                 clanAId,
                 clanBId
             );

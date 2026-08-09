@@ -1,3 +1,4 @@
+// Cores do Status do PvP
 export enum PvPStatus {
 
     WHITE = "white",
@@ -8,6 +9,16 @@ export enum PvPStatus {
 
 }
 
+// Estado do PvP (FLAG ROXO)
+export interface PvPState {
+    characterId: string;
+    status: PvPStatus;
+    purpleUntil: Date | null;
+    pvpPoints: number;
+    pkPoints: number;
+}
+
+// Relação do jogador com target(idPlayer)
 export enum PlayerRelation {
 
     NEUTRAL = "neutral",
@@ -20,6 +31,7 @@ export enum PlayerRelation {
 
 }
 
+// Tipos de combate
 export enum CombatType {
 
     NONE = "none",
@@ -32,6 +44,7 @@ export enum CombatType {
 
 }
 
+// Estado contador do flag
 export interface PvPFlag {
 
     playerId: string;
@@ -49,6 +62,7 @@ export interface PvPFlag {
 
 }
 
+// Estado do Karma/PK/RedSkull
 export interface PlayerCriminalState {
 
     playerId: string;
@@ -70,6 +84,7 @@ export interface PlayerCriminalState {
 
 }
 
+// Contador de Honra
 export interface PlayerHonor {
 
     playerId: string;
@@ -82,6 +97,7 @@ export interface PlayerHonor {
 
 }
 
+// Estado de guerras de clan
 export interface ClanWar {
 
     id: string;
@@ -90,12 +106,13 @@ export interface ClanWar {
 
     clanBId: string;
 
-    startedAt: number;
+    startedAt: Date;
 
     active: boolean;
 
 }
 
+// Data
 export interface PlayerData {
 
     id: string;

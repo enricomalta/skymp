@@ -1,16 +1,17 @@
 import {
-    WarRelation
+    ClanWar
 } from "../types/PvPTypes";
 
 export class WarService {
 
     private readonly wars =
-        new Map<string, WarRelation>();
+        new Map<string, ClanWar>();
 
     public startWar(
+        id: string,
         clanAId: string,
         clanBId: string
-    ): WarRelation {
+    ): ClanWar {
 
         if (
             clanAId === clanBId
@@ -39,7 +40,9 @@ export class WarService {
 
         }
 
-        const war: WarRelation = {
+        const war: ClanWar = {
+            
+            id,
 
             clanAId,
 
