@@ -9,6 +9,14 @@ import {
 } from "../types/PvPTypes";
 
 import {
+    DeathCause
+} from "../../death-penalty/types/DeathPenaltyTypes";
+
+import {
+    DeathPenaltySystem
+} from "../../death-penalty/DeathPenaltySystem";
+
+import {
     PvPStateService
 } from "./PvPStateService";
 
@@ -40,7 +48,10 @@ export class PvPService {
             PKService,
 
         private readonly warService:
-            WarService
+            WarService,
+
+        private readonly deathPenaltySystem?:
+            DeathPenaltySystem
     ) {}
 
     public attack(
@@ -139,23 +150,10 @@ export class PvPService {
 
         }
 
-        /*
-         * Atacar qualquer jogador envolvido
-         * em PvP normal coloca o atacante
-         * em Purple.
-         */
         this.stateService.setPurple(
             attackerId,
             PvPService.PURPLE_DURATION_MS
         );
-
-        const combatType =
-            target.status ===
-            PvPStatus.PURPLE
-
-                ? CombatType.PVP
-
-                : CombatType.PVP;
 
         Logger.debug(
             LoggerContext.PLAYER,
@@ -168,7 +166,8 @@ export class PvPService {
 
             targetId,
 
-            combatType,
+            combatType:
+                CombatType.PVP,
 
             attackerStatus:
                 this.stateService
@@ -188,12 +187,12 @@ export class PvPService {
 
     }
 
-    public resolveKill(
+    public async resolveKill(
         killerId: string,
         victimId: string,
         killerClanId: string | null = null,
         victimClanId: string | null = null
-    ): KillResult {
+    ): Promise<KillResult> {
 
         const killer =
             this.stateService.getState(
@@ -214,6 +213,11 @@ export class PvPService {
             );
 
         if (isWar) {
+
+            await this.applyDeathPenalty(
+                victimId,
+                DeathCause.WAR
+            );
 
             return {
 
@@ -238,12 +242,19 @@ export class PvPService {
         }
 
         /*
-         * Matar um PK não gera PK.
+         * Matar um PK não gera PK
+         * e também não gera penalidade
+         * para o assassino.
          */
         if (
             victim.status ===
             PvPStatus.RED
         ) {
+
+            await this.applyDeathPenalty(
+                victimId,
+                DeathCause.PK
+            );
 
             return {
 
@@ -282,6 +293,11 @@ export class PvPService {
                 killerId
             );
 
+            await this.applyDeathPenalty(
+                victimId,
+                DeathCause.PVP
+            );
+
             return {
 
                 killerId,
@@ -315,6 +331,11 @@ export class PvPService {
 
             this.pkService.applyPK(
                 killerId
+            );
+
+            await this.applyDeathPenalty(
+                victimId,
+                DeathCause.PVP
             );
 
             return {
@@ -358,6 +379,26 @@ export class PvPService {
                 false
 
         };
+
+    }
+
+    private async applyDeathPenalty(
+        characterId: string,
+        cause: DeathCause
+    ): Promise<void> {
+
+        if (
+            !this.deathPenaltySystem
+        ) {
+
+            return;
+
+        }
+
+        await this.deathPenaltySystem.applyDeathPenalty(
+            characterId,
+            cause
+        );
 
     }
 

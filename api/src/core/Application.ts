@@ -12,6 +12,7 @@ import { AuthModule } from "../modules/auth/AuthModule";
 import { CharacterModule } from "../modules/characters/CharacterModule";
 import { LevelModule } from "../modules/level/LevelModule";
 import { InventoryModule } from "../modules/inventory/InventoryModule";
+import { DeathPenaltySystem } from "../modules/death-penalty/DeathPenaltySystem";
 import { PvPSystem } from "../modules/PvP/PvPSystem";
 import { ItemModule } from "../modules/item/ItemModule";
 import { EconomyModule } from "../modules/economy/EconomyModule";
@@ -53,6 +54,9 @@ export class Application {
 
     private async initializeModules(): Promise<void> {
 
+        const deathPenaltySystem =
+        new DeathPenaltySystem();
+
         this.moduleLoader.register(
             new AuthModule()
         );
@@ -70,7 +74,13 @@ export class Application {
         );
 
         this.moduleLoader.register(
-            new PvPSystem()
+            deathPenaltySystem
+        );
+
+        this.moduleLoader.register(
+            new PvPSystem(
+                deathPenaltySystem
+            )
         );
 
         this.moduleLoader.register(

@@ -1,4 +1,5 @@
 import { Module } from "../../core/Module";
+
 import { Logger } from "../../core/Logger";
 import { LoggerContext } from "../../core/types/LoggerContext";
 
@@ -22,6 +23,22 @@ import {
     PvPService
 } from "./services/PvPService";
 
+import {
+    DeathPenaltySystem
+} from "../death-penalty/DeathPenaltySystem";
+
+import {
+    PKSystem
+} from "./PKSystem";
+
+import {
+    RedSkullSystem
+} from "./RedSkullSystem";
+
+import {
+    WarSystem
+} from "./WarSystem";
+
 export class PvPSystem implements Module {
 
     public readonly name =
@@ -39,10 +56,22 @@ export class PvPSystem implements Module {
     private readonly warService:
         WarService;
 
+    private readonly redSkullSystem:
+        RedSkullSystem;
+
+    private readonly pkSystem:
+        PKSystem;
+
+    private readonly warSystem:
+        WarSystem;
+
     private readonly pvpService:
         PvPService;
 
-    constructor() {
+    constructor(
+        deathPenaltySystem:
+            DeathPenaltySystem
+    ) {
 
         this.stateService =
             new PvPStateService();
@@ -60,12 +89,32 @@ export class PvPSystem implements Module {
         this.warService =
             new WarService();
 
+        this.redSkullSystem =
+            new RedSkullSystem(
+                this.stateService
+            );
+
+        this.pkSystem =
+            new PKSystem(
+                this.stateService,
+                this.pkService,
+                deathPenaltySystem,
+                this.redSkullSystem
+            );
+
+        this.warSystem =
+            new WarSystem(
+                this.warService,
+                deathPenaltySystem
+            );
+
         this.pvpService =
             new PvPService(
                 this.stateService,
                 this.pvpPointService,
                 this.pkService,
-                this.warService
+                this.warService,
+                deathPenaltySystem
             );
 
     }
@@ -88,7 +137,8 @@ export class PvPSystem implements Module {
 
     }
 
-    public getService(): PvPService {
+    public getService():
+        PvPService {
 
         return this.pvpService;
 
@@ -105,6 +155,27 @@ export class PvPSystem implements Module {
         WarService {
 
         return this.warService;
+
+    }
+
+    public getPKSystem():
+        PKSystem {
+
+        return this.pkSystem;
+
+    }
+
+    public getRedSkullSystem():
+        RedSkullSystem {
+
+        return this.redSkullSystem;
+
+    }
+
+    public getWarSystem():
+        WarSystem {
+
+        return this.warSystem;
 
     }
 
