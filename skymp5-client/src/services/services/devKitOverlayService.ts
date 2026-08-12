@@ -107,25 +107,43 @@ export class DevKitOverlayService extends ClientListener {
       return;
     }
 
-    this.textId = createText(
-      30,
-      30,
-      "TERRAS ALEM DEVKIT",
-      [1, 1, 1, 1],
-      "Tavern",
+    printConsole(
+      "[TerrasAlem DevKit] Creating Skyrim text..."
     );
 
-    setTextSize(
-      this.textId,
-      1.0,
-    );
+    try {
+      this.textId = createText(
+        50,
+        50,
+        "TERRAS ALEM DEVKIT\nF2 FUNCIONANDO",
+        [1, 1, 1, 1],
+        "Tavern",
+      );
 
-    setTextDepth(
-      this.textId,
-      100,
-    );
+      printConsole(
+        `[TerrasAlem DevKit] Text created with ID: ${this.textId}`
+      );
 
-    setTextsVisibility("on");
+      setTextSize(
+        this.textId,
+        1.0,
+      );
+
+      setTextDepth(
+        this.textId,
+        100,
+      );
+
+      setTextsVisibility("on");
+
+      printConsole(
+        "[TerrasAlem DevKit] Text visibility enabled"
+      );
+    } catch (error) {
+      printConsole(
+        `[TerrasAlem DevKit] ERROR creating text: ${error}`
+      );
+    }
   }
 
   private destroyOverlay() {

@@ -57,9 +57,9 @@ import { SweetCameraEnforcementService } from "./services/services/sweetCameraEn
 import { SweetTaffyNicknamesService } from "./services/services/sweetTaffyNicknamesService";
 import { ServerJsVerificationService } from "./services/services/serverJsVerificationService";
 import { SweetTaffyEvalService } from "./services/services/sweetTaffyEvalService";
-
-
 import { DevKitOverlayService } from "./services/services/devKitOverlayService";
+import { NameplateService } from "./services/services/nameplateService";
+
 
 once("update", () => {
   Utility.setINIBool("bAlwaysActive:General", true);
@@ -69,7 +69,6 @@ once("update", () => {
 
 const main = () => {
   try {
-    printConsole("========== TERRAS ALEM CLIENT TEST 123456 ==========");
     const controller = SpApiInteractor.getControllerInstance();
 
     const listeners = [
@@ -122,7 +121,8 @@ const main = () => {
       new ProfilingService(sp, controller),
       new SweetTaffyNicknamesService(sp, controller),
       new ServerJsVerificationService(sp, controller),
-      new DevKitOverlayService(sp, controller)
+      new DevKitOverlayService(sp, controller),
+      new NameplateService(sp, controller)
     ];
     SpApiInteractor.setup(listeners);
   } catch (e) {

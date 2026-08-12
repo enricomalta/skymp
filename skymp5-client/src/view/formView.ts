@@ -15,6 +15,7 @@ import { localIdToRemoteId } from "./worldViewMisc";
 import { SpApiInteractor } from "../services/spApiInteractor";
 import { WorldCleanerService } from "../services/services/worldCleanerService";
 import { GamemodeUpdateService } from "../services/services/gamemodeUpdateService";
+import { NameplateService } from "../services/services/nameplateService";
 
 export interface ScreenResolution {
   width: number;
@@ -305,6 +306,16 @@ export class FormView {
       }
       this.applyAll(refr, model);
 
+      const nameplateService =
+          SpApiInteractor.getControllerInstance()
+              .lookupListener(NameplateService);
+
+      nameplateService.update(
+          this.refrId,
+          refr,
+          model
+      );
+
       const gamemodeUpdateService = SpApiInteractor.getControllerInstance().lookupListener(GamemodeUpdateService);
       gamemodeUpdateService.updateNeighbor(refr, model, this.state);
     }
@@ -329,6 +340,14 @@ export class FormView {
     })
 
     this.localImmortal = false;
+
+    const nameplateService =
+        SpApiInteractor.getControllerInstance()
+            .lookupListener(NameplateService);
+
+    nameplateService.destroy(
+        this.refrId
+    );
     this.removeNickname();
   }
 
